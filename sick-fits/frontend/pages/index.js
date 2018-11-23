@@ -1,12 +1,9 @@
-import React from 'react';
-import Items from '../components/Items';
+import React from "react";
 
-
-const Home = (props) => (
-	<div>
-		<h1>This is the Home Page</h1>
-		<Items/>
-	</div>
+const Home = props => (
+  <div>
+    <h1>This is the Home Page</h1>
+  </div>
 );
 
 export default Home;
