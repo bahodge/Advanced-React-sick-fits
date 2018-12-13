@@ -62,73 +62,73 @@ class CreateItem extends Component {
   };
 
   render() {
-  return(
+    return (
 
-<Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
-{(createItem, { loading, error }) => (
-  <Form onSubmit={async e => {
-    e.preventDefault();
-    const res = await createItem();
-    Router.push({
-      pathname: "/item",
-      query: { id: res.data.createItem.id }
-    });
+      <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
+        {(createItem, { loading, error }) => (
+          <Form onSubmit={async e => {
+            e.preventDefault();
+            const res = await createItem();
+            Router.push({
+              pathname: "/item",
+              query: { id: res.data.createItem.id }
+            });
+          }
+          }>
+            <Error error={error}/>
+            <fieldset disabled={loading} aria-busy={loading}>
+              <label htmlFor="title">
+                Title
+                <input type="text"
+                       id='title'
+                       name="title"
+                       placeholder="Title"
+                       required
+                       onChange={this.handleChange}
+                       value={this.state.title}/>
+              </label>
+              <label htmlFor="description">
+                Description
+                <textarea
+                  id='description'
+                  name="description"
+                  placeholder="Description"
+                  required
+                  onChange={this.handleChange}
+                  value={this.state.description}/>
+              </label>
+              <label htmlFor="title">
+                Price
+                <input type="number"
+                       id='price'
+                       name="price"
+                       placeholder="Price"
+                       required
+                       onChange={this.handleChange}
+                       value={this.state.price ? parseInt(this.state.price) : 0}/>
+              </label>
+              <label htmlFor="file">
+                Upload File
+                <input type="file"
+                       id='file'
+                       name="file"
+                       placeholder="Upload an Image"
+                       required
+                       onChange={this.uploadFile}/>
+              </label>
+              {this.state.image ?
+                <img src={this.state.image}
+                     alt="upload_preview"/>
+                : null}
+              <button type="submit">Submit</button>
+            </fieldset>
+            <h2>Sell an Item</h2>
+
+          </Form>
+        )}</Mutation>
+    )
+      ;
   }
-  }>
-    <Error error={error}/>
-    <fieldset disabled={loading} aria-busy={loading}>
-      <label htmlFor="title">
-        Title
-        <input type="text"
-               id='title'
-               name="title"
-               placeholder="Title"
-               required
-               onChange={this.handleChange}
-               value={this.state.title}/>
-      </label>
-      <label htmlFor="description">
-        Description
-        <textarea
-          id='description'
-          name="description"
-          placeholder="Description"
-          required
-          onChange={this.handleChange}
-          value={this.state.description}/>
-      </label>
-      <label htmlFor="title">
-        Price
-        <input type="number"
-               id='price'
-               name="price"
-               placeholder="Price"
-               required
-               onChange={this.handleChange}
-               value={this.state.price ? this.state.price : 0}/>
-      </label>
-      <label htmlFor="file">
-        Upload File
-        <input type="file"
-               id='file'
-               name="file"
-               placeholder="Upload an Image"
-               required
-               onChange={this.uploadFile}/>
-      </label>
-      {this.state.image ?
-        <img src={this.state.image}
-             alt="upload_preview"/>
-        : null}
-      <button type="submit">Submit</button>
-    </fieldset>
-    <h2>Sell an Item</h2>
-
-  </Form>
-)}</Mutation>
-)
-  ;
-}
 }
 
 export default CreateItem;
